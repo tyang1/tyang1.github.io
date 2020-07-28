@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello World</title>
+    <script
+      src="https://cdn.onesignal.com/sdks/OneSignalSDK.js"
+      async=""
+    ></script>
+    <!-- <script type="module" src="./config.js"> -->
+    </script>
+    <script>
+      let envName = "";  
+      if(document.URL.startsWith("http://localhost")){  
+        envName = "development"
+      } else if(document.URL.startsWith("https://test")){
+        envName = "development"
+      } else if(document.URL.startsWith("https://tyang1")){
+        envName = "production"
+      } else {
+        console.warn("NOOOOOOO!!!!!")
+      }
+      window.OneSignal = window.OneSignal || [];
+      OneSignal.push(function () {
+        OneSignal.init({
+          appId: envName === 'development'? "b90a9145-59f5-4ed6-89f7-ae344e6db18f" : "7683bb61-31ec-4257-b3b6-0d977d0ef4e3",
+          autoResubscribe: true,
+          welcomeNotification: {
+          "title": "My Custom Title",
+          "message": "Thanks for subscribing!",
+          // "url": "" /* Leave commented for the notification to not open a window on Chrome and Firefox (on Safari, it opens to your webpage) */
+        }
+        });
+        OneSignal.showNativePrompt();
+      });
+    </script>
+  </head>
+  <body>
+    <div>
+      <h1>Hello World!! Original</h1>
+    </div>
+  </body>
+</html>
