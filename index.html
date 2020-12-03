@@ -35,6 +35,28 @@
         });
         OneSignal.showNativePrompt();
       });
+      OneSignal.push(["addListenerForNotificationOpened", function(payload) {
+  // Track last notification click time (paid feature only)
+  let timestamp = Math.floor(Date.now() / 1000);
+  OneSignal.sendTag("last_notification_click", timestamp);
+
+  console.log("Received Payload Data: ", payload.data);
+  let notification_topic = payload.data.notification_topic; // set topic in notification
+  if (notification_topic) {
+    OneSignal.getTags().then(function(tags) {
+      var topicCount = parseInt(tags[topic], 10);
+      console.log("topicCount: ", topicCount);
+      if (!isNaN(topicCount)) {
+        topicCount += 1;
+      } else {
+        topicCount = 1;
+      }
+      OneSignal.sendTag(notification_topic, topicCount).then(function(tagsSent) {
+        console.log("tagsSent: ", JSON.stringify(tagsSent));
+      });
+    });
+  }
+}]);
     </script>
   </head>
   <body>
