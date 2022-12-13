@@ -19,7 +19,7 @@
   "homepage": "https://github.com/tyang1/tyang1.github.io#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "posthtml-expressions": "^1.4.5"
   }
 }
